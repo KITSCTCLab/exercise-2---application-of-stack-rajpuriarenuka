@@ -28,7 +28,7 @@ class Evaluate:
     return self.top == -1
 
 
-  def pop(self):
+  def mypop(self):
     """
     Do pop operation if the stack is not empty.
     Returns:
@@ -87,8 +87,8 @@ class Evaluate:
         if token.isdigit():
             self.push(int(token))
         else:
-            operand2 = self.pop()
-            operand1 = self.pop()
+            operand2 = self.mypop()
+            operand1 = self.mypop()
             result = ops[token](operand1, operand2)
             self.push(result)
     return self.stack[0]
