@@ -1,3 +1,4 @@
+import operator
 class Evaluate:
   """This class validates and evaluate postfix expression.
   Attributes:
@@ -24,7 +25,7 @@ class Evaluate:
     Returns:
       True if it is empty, else returns False.
     """
-      # Write your code here
+    return self.top == -1
 
 
   def pop(self):
@@ -33,7 +34,10 @@ class Evaluate:
     Returns:
       The data which is popped out if the stack is not empty.
     """
-    # Write your code here
+    if not self.isEmpty():
+        x = self.pop()
+        self.top = self.top - 1
+        return x
 
 
   def push(self, operand):
@@ -42,7 +46,8 @@ class Evaluate:
     Arguments:
       operand: The operand to be pushed.
     """
-    # Write your code here
+    self.top += 1
+    self.stack.append(operand)
 
 
   def validate_postfix_expression(self, expression):
@@ -53,7 +58,13 @@ class Evaluate:
     Returns:
       True if the expression is valid, else returns False.
     """
-    # Write your code here
+    counter_digit = counter_operand = 0
+    for token in expression:
+        if token.isdigit():
+            counter_digit += 1
+        else:
+            counter_operand += 1
+    return counter_digit == counter_operand + 1
 
 
   def evaluate_postfix_expression(self, expression):
@@ -64,8 +75,23 @@ class Evaluate:
     Returns:
       The result of evaluated postfix expression.
     """
-    # Write your code here
-
+    ops = {
+    '+' : operator.add,
+    '-' : operator.sub,
+    '*' : operator.mul,
+    '/' : operator.truediv,
+    '%' : operator.mod,
+    '^' : operator.xor,
+    }
+    for token in expression:
+        if token.isdigit():
+            self.push(int(token))
+        else:
+            operand2 = self.pop()
+            operand1 = self.pop()
+            result = ops[token](operand1, operand2)
+            self.push(result)
+    return self.stack[0]
 
 # Do not change the following code
 postfix_expression = input()  # Read postfix expression
