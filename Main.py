@@ -90,7 +90,7 @@ class Evaluate:
             operand2 = self.mypop()
             operand1 = self.mypop()
             result = ops[token](operand1, operand2)
-            self.push(result)
+            self.push(int(result))
     return self.stack[0]
 
 # Do not change the following code
