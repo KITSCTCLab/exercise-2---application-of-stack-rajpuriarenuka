@@ -35,7 +35,7 @@ class Evaluate:
       The data which is popped out if the stack is not empty.
     """
     if not self.isEmpty():
-        x = self.pop()
+        x = self.stack.pop()
         self.top = self.top - 1
         return x
 
